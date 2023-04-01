@@ -59,7 +59,7 @@ export default function Home() {
             <section>
               <div>
                 <p>
-                Почему сосульки и леденцы не назвали наоборот? {process.env.VAR_TEST}
+                Почему сосульки и леденцы не назвали наоборот?
                 </p>
 
                 <div>
@@ -81,6 +81,7 @@ export default function Home() {
                     </Fragment>
                   ) : (
                     <Fragment>
+                      
                       {results.data.map((result, index) => {
                         const { percent, isMax } = result;
                         const name = config[index].name;

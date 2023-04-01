@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const {
     query: { id }
   } = req;
-
+  console.log("test");
   try {
     if (!id) {
       throw new Error('Missing id');
