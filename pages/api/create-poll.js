@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const {
     query: { id }
   } = req;
-  console.log("test");
+  
   try {
     if (!id) {
       throw new Error('Missing id');
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     });
 
     await doc.getInfo();
+    console.log(doc.title);
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows();
     const raw_data = rows[0]._rawData;

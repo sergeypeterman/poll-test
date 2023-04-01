@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import React, { Fragment, useEffect, useState } from "react";
 
-//
+
 const config = [
   {
     name: "Да",
