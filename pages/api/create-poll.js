@@ -1,6 +1,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const sheetId = process.env.GOOGLE_SHEET_ID;
 const doc = new GoogleSpreadsheet(sheetId);
+console.log("last 5 symb: " + sheetId.slice(sheetId.length-5));
 
 export default async function handler(req, res) {
   const {
