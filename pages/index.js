@@ -27,7 +27,7 @@ export default function Home() {
   const handleClick = async (id) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(`/api/create-vote?id=${id}`);
+      const response = await fetch(`/api/create-poll?id=${id}`);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
