@@ -1,0 +1,35 @@
+.footer{
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  text-decoration: none;
+}
+.footer a{
+  color: beige;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.poll{
+  display: flex;
+  justify-content: center;
+  background-color: aqua;
+}
+
+.page{
+  display: flex;
+
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: rgb(209, 230, 230);
+  height: 100%;
+  width: 100%;
+}
