@@ -1,6 +1,6 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-
-const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
+const sheetId = process.env.GOOGLE_SHEET_ID;
+const doc = new GoogleSpreadsheet(sheetId);
 
 export default async function handler(req, res) {
   const {
@@ -12,9 +12,10 @@ export default async function handler(req, res) {
       throw new Error('Missing id');
     }
 
+    console.log(sheetId.slice(sheetId.length-5));
     await doc.useServiceAccountAuth({
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')
+      private_key: process.env.GOOGLE_PRIVATE_KEY
     });
 
     await doc.getInfo();

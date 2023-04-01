@@ -27,8 +27,10 @@ export default function Home() {
   const handleClick = async (id) => {
     setIsSubmitting(true);
     try {
+      console.log("try");
       const response = await fetch(`/api/create-poll?id=${id}`);
       if (!response.ok) {
+        console.log(response.statusText);
         throw new Error(response.statusText);
       }
       const result = await response.json();
@@ -36,6 +38,7 @@ export default function Home() {
       setIsSubmitting(false);
       setHasVoted(true);
     } catch (error) {
+      console.log("error.message");
       setIsSubmitting(false);
       setError({
         error: true,
