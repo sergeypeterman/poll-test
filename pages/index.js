@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import React, { Fragment, useEffect, useState } from "react";
 
-
 const config = [
   {
     name: "Да",
@@ -58,14 +57,12 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.page}>
           <div className={styles.poll}>
-            <h1>Fuck yeah!</h1>
+            <h1 className={styles.fuck}>Ω</h1>
             <section>
               <div>
-                <p>
-                Почему сосульки и леденцы не назвали наоборот?
-                </p>
+                <p className={styles.question}>Почему сосульки и леденцы не назвали наоборот?</p>
 
-                <div>
+                <div className={styles.buttons_wrap}>
                   {!hasVoted ? (
                     <Fragment>
                       {config.map((item, index) => {
@@ -76,35 +73,36 @@ export default function Home() {
                             key={index}
                             onClick={() => handleClick(id)}
                             disabled={isSubmitting || error}
+                            className={styles.button}
                           >
-                            <span>{name}</span>
+                            <span className={styles.button_text}>{name}</span>
+                            <span></span>
                           </button>
                         );
                       })}
                     </Fragment>
                   ) : (
                     <Fragment>
-                      
                       {results.data.map((result, index) => {
                         const { percent, isMax } = result;
                         const name = config[index].name;
+
                         return (
-                          <div key={index}>
-                            <span
-                              style={{
-                                width: `${percent}%`,
-                              }}
-                            />
-                            <span>{name}</span>
+                          <button
+                            key={index}
+                            className={styles.button_pressed}
+                            
+                          >
+                            <span className={styles.button_text}>{name}</span>
                             <span>{`${percent}%`}</span>
-                          </div>
+                          </button>
                         );
                       })}
                     </Fragment>
                   )}
                 </div>
-                {hasVoted ? <p>{`${results.total} votes`}</p> : null}
-                {error ? <p>{error.message}</p> : null}
+                {hasVoted ? <p className={styles.question}>{`${results.total} votes`}</p> : null}
+                {error ? <p className={styles.question}>{error.message}</p> : null}
               </div>
             </section>
           </div>

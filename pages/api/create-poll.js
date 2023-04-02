@@ -1,26 +1,24 @@
-const { GoogleSpreadsheet } = require('google-spreadsheet');
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 const sheetId = process.env.GOOGLE_SHEET_ID;
 const doc = new GoogleSpreadsheet(sheetId);
-console.log("last 5 symb: " + sheetId.slice(sheetId.length-4));
 
 export default async function handler(req, res) {
   const {
-    query: { id }
+    query: { id },
   } = req;
-  
+
   try {
     if (!id) {
-      throw new Error('Missing id');
+      throw new Error("Missing id");
     }
 
-    console.log("last 5 symb: " + sheetId.slice(sheetId.length-5));
     await doc.useServiceAccountAuth({
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY
+      private_key: process.env.GOOGLE_PRIVATE_KEY,
     });
 
     await doc.getInfo();
-    console.log(doc.title);
+
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows();
     const raw_data = rows[0]._rawData;
@@ -30,7 +28,10 @@ export default async function handler(req, res) {
     rows[0][id] = Number(row_value) + 1;
     await rows[0].save();
 
-    const total = raw_data.reduce((values, value) => Number(values) + Number(value), 0);
+    const total = raw_data.reduce(
+      (values, value) => Number(values) + Number(value),
+      0
+    );
     const max = Math.max(...raw_data.map((item) => item));
 
     const results = header_values.map((result, index) => {
@@ -39,11 +40,11 @@ export default async function handler(req, res) {
         value: result,
         count: count,
         percent: Number((count * 100) / total).toFixed(1),
-        isMax: count >= max
+        isMax: count >= max,
       };
     });
 
-    res.status(200).json({ message: 'A ok!', total: total, data: results });
+    res.status(200).json({ message: "A ok!", total: total, data: results });
   } catch (error) {
     res.status(500).json(error);
   }
