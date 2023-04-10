@@ -1,21 +1,11 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import React, { Fragment, useEffect, useState } from "react";
+//import { ADDROW } from "../constants";
+import * as Constants from "../constants";
 
-const config = [
-  {
-    name: "Да",
-    id: "yes",
-  },
-  {
-    name: "Нет",
-    id: "no",
-  },
-  {
-    name: "Смешная третья опция",
-    id: "funny_third",
-  },
-];
+
+const config = Constants.CONFIG;
 
 export default function Home() {
   const [hasVoted, setHasVoted] = useState(false);
@@ -60,7 +50,9 @@ export default function Home() {
             <h1 className={styles.fuck}>Ω</h1>
             <section>
               <div>
-                <p className={styles.question}>Почему сосульки и леденцы не назвали наоборот?</p>
+                <p className={styles.question}>
+                  Почему сосульки и леденцы не назвали наоборот?
+                </p>
 
                 <div className={styles.buttons_wrap}>
                   {!hasVoted ? (
@@ -88,11 +80,7 @@ export default function Home() {
                         const name = config[index].name;
 
                         return (
-                          <button
-                            key={index}
-                            className={styles.button_pressed}
-                            
-                          >
+                          <button key={index} className={styles.button_pressed}>
                             <span className={styles.button_text}>{name}</span>
                             <span>{`${percent}%`}</span>
                           </button>
@@ -100,9 +88,14 @@ export default function Home() {
                       })}
                     </Fragment>
                   )}
+                  
                 </div>
-                {hasVoted ? <p className={styles.question}>{`${results.total} votes`}</p> : null}
-                {error ? <p className={styles.question}>{error.message}</p> : null}
+                {hasVoted ? (
+                  <p className={styles.question}>{`${results.total} votes`}</p>
+                ) : null}
+                {error ? (
+                  <p className={styles.question}>{error.message}</p>
+                ) : null}
               </div>
             </section>
           </div>

@@ -6,7 +6,9 @@ export default async function handler(req, res) {
   const {
     query: { id },
   } = req;
+  // equivalent to ** const id = req.query.id;
 
+  
   try {
     if (!id) {
       throw new Error("Missing id");
@@ -43,8 +45,23 @@ export default async function handler(req, res) {
         isMax: count >= max,
       };
     });
-
     res.status(200).json({ message: "A ok!", total: total, data: results });
+    /*if(row_value != undefined) //id corresponds to a column name
+    {
+      res.status(200).json({ message: "A ok!", total: total, data: results });
+    }
+    else if(id == 'Add_cell')
+    {
+      
+      res.status(200).json({ message: "A ok!", total: 'added cell', data: results });
+    }
+    else if(id == 'Add_row')
+    {
+      //const rows_new = rows[0].map((item) => (Number(item) + 1));
+      sheet.addRow(rows[0]);
+      //console.log(rows_new);
+      res.status(200).json({ message: "A ok!", total: 'added row', data: results });
+    }*/
   } catch (error) {
     res.status(500).json(error);
   }
